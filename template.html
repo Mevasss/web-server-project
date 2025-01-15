@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7f8fc;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        h1 {
+            background-color: #6200ea;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        #chat {
+            width: 100%;
+            max-width: 600px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            margin-bottom: 20px;
+            overflow-y: auto;
+            max-height: 400px;
+        }
+
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .message .name {
+            font-weight: bold;
+            font-size: 14px;
+            color: #4caf50;
+            margin-bottom: 5px;
+        }
+
+        .message.own .name {
+            color: #6200ea;
+        }
+
+        .message .content {
+            display: inline-block;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #e0e0e0;
+            color: #333;
+            max-width: 80%;
+        }
+
+        .message.own .content {
+            background-color: #d1e7dd;
+            color: #155724;
+            align-self: flex-end;
+        }
+
+        .message.other .content {
+            background-color: #f8d7da;
+            color: #721c24;
+            align-self: flex-start;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        input[type="text"], button {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #6200ea;
+            box-shadow: 0 0 5px rgba(98, 0, 234, 0.5);
+        }
+
+        button {
+            background-color: #6200ea;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5a00d2;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.5rem;
+                padding: 15px;
+            }
+
+            #chat {
+                padding: 10px;
+                max-height: 300px;
+            }
+
+            input[type="text"], button {
+                font-size: 14px;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Simple Chat</h1>
+    <div id="chat">
+        {{chat}}
+    </div>
+    <form method="POST">
+        <input type="text" name="nickname" placeholder="Enter your nickname..." value="{{nickname}}" required>
+        <input type="text" name="message" placeholder="Enter your message..." required>
+        <button type="submit">Send</button>
+    </form>
+    <script>
+        // Прокрутка чата вниз при загрузке страницы
+        window.onload = function() {
+            const chatContainer = document.getElementById('chat');
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        };
+    </script>
+</body>
+</html>
